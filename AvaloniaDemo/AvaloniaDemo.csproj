@@ -32,8 +32,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\DataDemoView.axaml.cs">
-      <DependentUpon>DataDemoView.axaml</DependentUpon>
-    </Compile>
+    <None Update="ChangeLog.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Notice.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="UserConfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
+
 </Project>
