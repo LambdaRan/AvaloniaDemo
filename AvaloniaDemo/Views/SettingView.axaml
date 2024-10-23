@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaDemo.SettingView"
+             xmlns:vm="using:AvaloniaDemo.ViewModels"
+             x:DataType="vm:SettingViewModel"
+             x:CompileBindings="True">
+
+  <Grid ShowGridLines="False" Margin="2,2">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    
+    <!--设置目录-->
+    <TextBlock Grid.Row="0" Grid.Column="0" Text="目录：" VerticalAlignment="Center"/>
+    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding RootPath}"/>
+    <Button Grid.Row="0" Grid.Column="2" BorderThickness="0" Content="选择"
+            Command="{Binding SelectRootFolderCommand}" CommandParameter="{Binding $parent[UserControl]}"/>
+  </Grid>
+</UserControl>

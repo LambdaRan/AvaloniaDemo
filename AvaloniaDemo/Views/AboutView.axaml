@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:AvaloniaDemo.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaDemo.Views.AboutView"
+             x:DataType="vm:AboutViewModel"
+             x:CompileBindings="True">
+  <StackPanel>
+    <WrapPanel>
+      <Button Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+              Content="打开AvaloniaDemo目录" Command="{Binding OpenAvaloniaDemoFolderCommand}"/>
+      <Button Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+           Content="打开AvaloniaDemoLog目录" Command="{Binding OpenAvaloniaDemoLogFolderCommand}"/>
+    </WrapPanel>
+    <TextBlock xml:space="preserve">
+TODO:
+    1> xxxx
+    2> xxxx
+    </TextBlock>
+  </StackPanel>
+
+</UserControl>

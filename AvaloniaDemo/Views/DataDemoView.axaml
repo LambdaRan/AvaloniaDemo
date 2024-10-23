@@ -1,0 +1,56 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:AvaloniaDemo.ViewModels"
+             xmlns:controls="using:AvaloniaDemo.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaDemo.Views.DataDemoView"
+             x:DataType="vm:DataDemoViewModel"
+             x:CompileBindings="True">
+
+  <Grid ShowGridLines="True" Margin="1,2">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="*" MaxWidth="400"/>
+    </Grid.ColumnDefinitions>
+    
+    <!--搜索-->
+    <controls:FilterTextBox Grid.Row="0" Grid.Column="0" Margin="0,0,0,2"
+                            DataContext="{Binding FilterViewModel}"
+                            Text="{Binding FilterString}"
+                            Watermark="Filter data"
+                            UseCaseSensitiveFilter="{Binding UseCaseSensitiveFilter}"
+                            UseWholeWordFilter="{Binding UseWholeWordFilter}"
+                            UseRegexFilter="{Binding UseRegexFilter}"/>
+    <!--数据-->
+    <TreeDataGrid Grid.Row="1" Grid.Column="0" CanUserResizeColumns="True" CanUserSortColumns="false" Source="{Binding Source}" 
+                  DoubleTapped="TreeDataGrid_OnDoubleTapped" KeyDown="OnTreeDataGridKeyDown">
+      <TreeDataGrid.ContextMenu>
+        <ContextMenu IsVisible="True">
+          <MenuItem Header="命令1" />
+          <Separator/>
+          <MenuItem Header="命令2 | Ctrl+U" HotKey="Ctrl+U"/>
+        </ContextMenu>
+      </TreeDataGrid.ContextMenu>
+    </TreeDataGrid>
+    <!--快捷操作-->
+    <Label Grid.Row="0" Grid.Column="1" Content="其他内容" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+    <StackPanel Grid.Row="1" Grid.Column="1" IsVisible="True">
+      <!--其他内容-->
+      <UniformGrid Rows="2" Columns="4">
+        <Button Classes="accent" Margin="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                Content="button1" />
+      </UniformGrid>
+      <Separator/>
+      <!--其他工具-->
+      <Panel>
+        <CheckBox IsChecked="True">CheckBox</CheckBox>
+      </Panel>
+    </StackPanel>
+  </Grid>
+</UserControl>

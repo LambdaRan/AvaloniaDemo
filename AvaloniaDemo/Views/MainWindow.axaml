@@ -1,0 +1,70 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:AvaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+        xmlns:vm="using:AvaloniaDemo.ViewModels"
+        x:Class="AvaloniaDemo.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        x:CompileBindings="True"
+        Icon="/Assets/avalonia-logo.ico"
+        MinHeight="400" MinWidth="500"
+        Title="AvaloniaDemo">
+
+  <!--<Design.DataContext>
+       --><!--This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)--><!-- 
+      <vm:MainWindowViewModel/>
+  </Design.DataContext>-->
+  
+  <Window.Styles>
+    <StyleInclude Source="avares://AvaloniaDemo/Controls/FilterTextBox.axaml" />
+  </Window.Styles>
+
+  <Grid ShowGridLines="False">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="3*"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*" MinHeight="50" MaxHeight="500"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <!--左边-->
+    <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"  BoxShadow="2 2 5 0 DarkGray">
+      <StackPanel>
+        <Label>替换图标</Label>
+        <ListBox Margin="3" SelectionMode="Single" ItemsSource="{Binding Items}" SelectionChanged="OnSelectionChanged"
+                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+          <ListBox.ItemTemplate>
+            <DataTemplate DataType="vm:NavigationItem">
+              <TextBlock Text="{Binding Label}" VerticalAlignment="Center" />
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </StackPanel>
+    </Border>
+    <!--内容-->
+    <Border Grid.Row="0" Grid.Column="1" BorderBrush="GreenYellow" BorderThickness="1">
+      <TransitioningContentControl Content="{Binding CurrentPage}">
+        <TransitioningContentControl.PageTransition>
+          <PageSlide Orientation="Horizontal" Duration="0:00:00.500" />
+        </TransitioningContentControl.PageTransition>
+      </TransitioningContentControl>
+    </Border>
+    <!--分割-->
+    <GridSplitter Grid.Row="1" Grid.Column="1" Background="Bisque" ResizeDirection="Rows" Height="4"/>
+    <!--日志-->
+    <Border Grid.Row="2" Grid.Column="1" BoxShadow="1 2 5 0 DarkGray">
+      <AvaloniaEdit:TextEditor Name="Editor" ShowLineNumbers="false" />
+    </Border>
+    <!--状态栏-->
+    <Panel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+      <Rectangle Fill="{StaticResource Error}" IsVisible="{Binding IsError, Mode=OneWay}"/>
+      <TextBlock Margin="6,4" FontSize="16" TextAlignment="Left" Text="{Binding StatusMessage}" />
+    </Panel>
+  </Grid>
+</Window>
